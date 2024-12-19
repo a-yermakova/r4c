@@ -6,3 +6,15 @@ class Robot(models.Model):
     model = models.CharField(max_length=2, blank=False, null=False)
     version = models.CharField(max_length=2, blank=False, null=False)
     created = models.DateTimeField(blank=False, null=False)
+
+    @classmethod
+    def create_robot(cls, model: str, version: str, created: str):
+        serial = f"{model}-{version}"
+        robot = Robot(
+            serial=serial,
+            model=model,
+            version=version,
+            created=created,
+        )
+        robot.save()
+        return robot
